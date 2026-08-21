@@ -1,0 +1,5 @@
+#include <iostream>
+using namespace std;
+class WalletManager; class DigitalWallet{private:string userName;double walletBalance;bool walletStatus;public:DigitalWallet(string n,double b,bool s):userName(n),walletBalance(b),walletStatus(s){}friend class WalletManager;};
+class WalletManager{public:void displayDetails(DigitalWallet&w){cout<<"User: "<<w.userName<<"\nBalance: Rs. "<<w.walletBalance<<"\nStatus: "<<(w.walletStatus?"Active":"Disabled")<<endl;}void addMoney(DigitalWallet&w,double a){if(w.walletStatus&&a>0)w.walletBalance+=a;}void deductMoney(DigitalWallet&w,double a){if(w.walletStatus&&a>0&&a<=w.walletBalance)w.walletBalance-=a;else cout<<"Insufficient balance or wallet disabled.\n";}void disableWallet(DigitalWallet&w){w.walletStatus=false;}void displayStatus(DigitalWallet&w){cout<<(w.walletStatus?"Active":"Disabled")<<endl;}};
+int main(){DigitalWallet w("Ritesh",5000,true);WalletManager m;m.displayDetails(w);m.addMoney(w,2000);m.deductMoney(w,1500);m.displayStatus(w);m.disableWallet(w);m.displayDetails(w);return 0;}
